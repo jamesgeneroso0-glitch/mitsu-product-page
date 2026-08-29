@@ -46,7 +46,7 @@ export default function Home() {
             transition={{ duration: 0.3, delay: 0.35 }}
             className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-cyan-400 to-indigo-300 py-1 leading-tight transform-gpu"
           >
-            Everything shared in a
+            Everything shared
           </motion.span>
 
           <motion.span
@@ -55,7 +55,7 @@ export default function Home() {
             transition={{ duration: 0.3, delay: 0.5 }}
             className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-indigo-300 py-1 leading-tight transform-gpu"
           >
-            single tap.
+            in a single tap.
           </motion.span>
         </h1>
 
@@ -88,7 +88,7 @@ export default function Home() {
 
           <div className="text-center py-2">
             <span className="text-[11px] text-indigo-300/80 uppercase tracking-widest font-semibold px-2.5 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20">
-              {isOpen ? "[ NFC Active ]" : "[ Tap to Test NFC ]"}
+              {isOpen ? "[ Card Active ]" : "[ Tap to View Profile ]"}
             </span>
           </div>
 
