@@ -77,7 +77,7 @@ export default function Home() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: 0.6 }}
+          transition={{ duration: 0.3, delay: 0.8 }}
           onClick={() => setIsOpen(true)}
           className="w-72 h-44 bg-slate-900 border border-indigo-500/30 rounded-2xl shadow-xl p-6 cursor-pointer flex flex-col justify-between relative overflow-hidden group select-none hover:scale-[1.02] active:scale-[0.98] transition-transform duration-150 transform-gpu"
         >
@@ -109,7 +109,7 @@ export default function Home() {
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.15 }}
+              transition={{ duration: 0.3, delay: 0.8 }}
               className="w-80 bg-slate-900 border border-slate-800 rounded-3xl p-6 shadow-2xl flex flex-col items-center text-center relative transform-gpu"
             >
               <div className="w-20 h-20 rounded-full bg-gradient-to-tr from-indigo-500 to-cyan-400 p-0.5 mb-3 shadow-lg shadow-indigo-500/20">
@@ -163,6 +163,111 @@ export default function Home() {
         </AnimatePresence>
 
       </div>
+      {/* --- FAQ & PRICING SECTION --- */}
+<section className="py-16 px-6 max-w-3xl mx-auto border-t border-slate-900">
+  <div className="text-center mb-10">
+    <motion.h2 
+      initial={{ opacity: 0, y: 15 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.3 }}
+      className="text-3xl font-bold tracking-tight mb-2"
+    >
+      Frequently Asked Questions & Pricing
+    </motion.h2>
+    <p className="text-slate-400 text-xs md:text-sm">
+      Lahat ng kailangan mong malaman tungkol sa Black & White Edition Smart NFC Card.
+    </p>
+  </div>
+
+  {/* Single Product Price Highlight Card */}
+  <motion.div 
+    initial={{ opacity: 0, y: 15 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.3 }}
+    className="bg-slate-900/80 border border-indigo-500/30 rounded-2xl p-6 mb-8 text-center relative overflow-hidden shadow-xl"
+  >
+    <span className="bg-indigo-500/20 text-indigo-300 text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full border border-indigo-500/30">
+      Black & White Edition
+    </span>
+    <div className="mt-4 mb-2">
+      <span className="text-4xl font-extrabold text-white">₱499</span>
+      <span className="text-xs text-slate-400"> / one-time payment</span>
+    </div>
+    <p className="text-xs text-slate-400 max-w-xs mx-auto">
+      Kabilang na ang custom vertical print, built-in NTAG213 chip, at lifetime profile access. Walang monthly fees.
+    </p>
+  </motion.div>
+
+  {/* Accordion Questions */}
+  <div className="flex flex-col gap-3">
+    {[
+      {
+        q: "Magkano ang Black & White Edition NFC Card?",
+        a: "₱499 lang ang one-time payment para sa physical card. Kasama na rito ang pag-program ng NTAG213 microchip at lifetime access sa pag-edit ng iyong profile links."
+      },
+      {
+        q: "Gumagana ba ito sa lahat ng uri ng smartphone?",
+        a: "Oo! Native NFC support ang karamihan sa mga modernong iOS (iPhone XR pataas) at Android phones. Para naman sa mga lumang telepono, pwedeng-pwede nilang i-scan ang custom QR code sa likod ng card."
+      },
+      {
+        q: "Kailangan ba ng special app para mabasa ang card?",
+        a: "Hindi na! Pagka-tap ng card sa phone, awtomatikong magbubukas ang browser para ipakita ang iyong digital profile at links."
+      },
+      {
+        q: "May monthly o yearly subscription fee ba?",
+        a: "Wala! One-time payment lang ang ₱499. Wala ka nang kailangang bayaran na buwanan o taunang bayarin."
+      },
+      {
+        q: "Paano ko mailalagay o mababago ang links ko?",
+        a: "Bibigyan ka namin ng access kung saan maaari mong palitan o i-update ang iyong portfolio, social media links, o mobile number anumang oras."
+      },
+      {
+        q: "Matibay ba ang card at hindi agad nasisira?",
+        a: "Oo, gawa ito sa premium matte PVC na waterproof at scratch-resistant. Ligtas ito kahit mabasa o maipit sa pitaka."
+      }
+    ].map((faq, index) => {
+      const [faqOpen, setFaqOpen] = useState(false);
+
+      return (
+        <motion.div 
+          key={index}
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.2, delay: index * 0.05 }}
+          className="bg-slate-900/60 border border-slate-800 rounded-2xl overflow-hidden"
+        >
+          <button
+            type="button"
+            onClick={() => setFaqOpen(!faqOpen)}
+            className="w-full p-4 text-left flex justify-between items-center gap-4 focus:outline-none"
+          >
+            <span className="font-semibold text-xs md:text-sm text-slate-200">{faq.q}</span>
+            <span className={`text-indigo-400 font-bold text-base transition-transform duration-200 ${faqOpen ? 'rotate-45' : ''}`}>
+              +
+            </span>
+          </button>
+
+          <AnimatePresence>
+            {faqOpen && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.2, ease: "easeInOut" }}
+                className="px-4 pb-4 text-xs text-slate-400 leading-relaxed border-t border-slate-800/50 pt-3"
+              >
+                {faq.a}
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </motion.div>
+      );
+    })}
+  </div>
+</section>
     </main>
   );
 }
