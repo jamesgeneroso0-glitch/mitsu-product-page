@@ -63,7 +63,6 @@ export default function ProductLandingPage() {
     setIsSubmitting(true);
 
     const formDataToSend = new FormData(e.currentTarget);
-    // Nagamit na ang iyong totoong Web3Forms Access Key
     formDataToSend.append("access_key", "902209db-61d3-4b2a-831d-a9bff915719b");
 
     try {
@@ -75,13 +74,13 @@ export default function ProductLandingPage() {
       const data = await response.json();
 
       if (data.success) {
-        alert("Salamat! Naipadala nang maayos ang inquiry mo sa email.");
+        alert("Thank you! Your inquiry has been sent successfully.");
         setFormData({ name: '', contact: '', message: '' });
       } else {
-        alert("Nagka-error sa pagpapadala: " + data.message);
+        alert("Failed to send message: " + data.message);
       }
     } catch (error) {
-      alert("Nagka-error sa pagpapadala ng message.");
+      alert("An error occurred while sending your message.");
     } finally {
       setIsSubmitting(false);
     }
