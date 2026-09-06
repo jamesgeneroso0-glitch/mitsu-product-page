@@ -175,7 +175,7 @@ export default function ProductLandingPage() {
               transition={{ duration: 0.3, delay: 0.3 }}
               className="text-slate-400 text-sm md:text-base max-w-lg mx-auto"
             >
-              Share your social media, portfolio, and contact details in a single tap. Designed for professionals, creators, and students.
+              Your all-in-one smart profile for social connections, gaming stats, business portfolios, and content creation. 
             </motion.p>
           </div>
 
