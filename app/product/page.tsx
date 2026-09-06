@@ -49,6 +49,7 @@ function FAQItem({ q, a, index }: { q: string; a: string; index: number }) {
 export default function ProductLandingPage() {
   const [isOpen, setIsOpen] = useState(false);
   const [cardTheme, setCardTheme] = useState<'midnight' | 'rose' | 'emerald'>('midnight');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const [formData, setFormData] = useState({
     name: '',
@@ -56,15 +57,33 @@ export default function ProductLandingPage() {
     message: ''
   });
 
-  const handleSubmit = (e: FormEvent) => {
+  // --- Web3Forms Handler ---
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const recipient = 'mitsukazuwara1112@gmail.com';
-    const subject = encodeURIComponent(`NFC Card Inquiry from ${formData.name || 'Website Visitor'}`);
-    const body = encodeURIComponent(
-      `Name: ${formData.name}\nContact: ${formData.contact}\n\nInquiry Details:\n${formData.message}`
-    );
+    setIsSubmitting(true);
 
-    window.location.href = `mailto:${recipient}?subject=${subject}&body=${body}`;
+    const formDataToSend = new FormData(e.currentTarget);
+    formDataToSend.append("access_key", "902209db-61d3-4b2a-831d-a9bff915719b");
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formDataToSend
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        alert("Thank you! Your inquiry has been sent successfully.");
+        setFormData({ name: '', contact: '', message: '' });
+      } else {
+        alert("Failed to send message: " + data.message);
+      }
+    } catch (error) {
+      alert("An error occurred while sending your message.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const themeStyles = {
@@ -144,7 +163,7 @@ export default function ProductLandingPage() {
               transition={{ duration: 0.3, delay: 0.2 }}
               className="text-4xl md:text-6xl font-extrabold tracking-tight mb-4 leading-tight"
             >
-              The Only Business Card <br />
+              The Only Card <br />
               <span className={`text-transparent bg-clip-text bg-gradient-to-r ${themeStyles[cardTheme].accentText}`}>
                 You'll Ever Need.
               </span>
@@ -522,6 +541,7 @@ export default function ProductLandingPage() {
                 <label className="text-xs font-medium text-slate-400 block mb-1">Your Name</label>
                 <input 
                   type="text" 
+                  name="name"
                   required
                   placeholder="John Doe"
                   value={formData.name}
@@ -534,6 +554,7 @@ export default function ProductLandingPage() {
                 <label className="text-xs font-medium text-slate-400 block mb-1">Email or Contact Number</label>
                 <input 
                   type="text" 
+                  name="contact"
                   required
                   placeholder="john@email.com / 0912..."
                   value={formData.contact}
@@ -545,6 +566,7 @@ export default function ProductLandingPage() {
               <div>
                 <label className="text-xs font-medium text-slate-400 block mb-1">Inquiry or Order Details</label>
                 <textarea 
+                  name="message"
                   rows={3}
                   required
                   placeholder="I'd like to order a customized Black & White NFC card..."
@@ -556,9 +578,10 @@ export default function ProductLandingPage() {
 
               <button 
                 type="submit"
-                className="w-full py-3 bg-indigo-600 hover:bg-indigo-500 font-semibold rounded-xl text-xs flex items-center justify-center gap-2 transition-colors active:scale-95"
+                disabled={isSubmitting}
+                className="w-full py-3 bg-indigo-600 hover:bg-indigo-500 disabled:bg-indigo-800 font-semibold rounded-xl text-xs flex items-center justify-center gap-2 transition-colors active:scale-95"
               >
-                <Send size={14} /> Send Inquiry via Email
+                <Send size={14} /> {isSubmitting ? "Sending..." : "Send Inquiry via Email"}
               </button>
             </motion.form>
           </div>
@@ -634,7 +657,7 @@ export default function ProductLandingPage() {
           {/* Accordion Questions List */}
           <div className="flex flex-col gap-3">
             {faqData.map((faq, index) => (
-              <FAQItem key={index} q={faq.q} a={faq.a} index={index} />
+              <FAQItem key={faq.q} q={faq.q} a={faq.a} index={index} />
             ))}
           </div>
         </section>
@@ -642,7 +665,7 @@ export default function ProductLandingPage() {
 
       {/* --- FOOTER SECTION --- */}
       <footer className="bg-slate-950 border-t border-slate-900 py-10 px-6 text-center text-xs text-slate-500">
-        <p>© {new Date().getFullYear()} MSC Smart NFC. All rights reserved.</p>
+        <p>© {new Date().getFullYear()} Mitsu Smart Card. All rights reserved.</p>
       </footer>
 
     </div>
