@@ -87,9 +87,9 @@ export default function Home() {
       <div className="text-center max-w-xl mb-6 z-10 flex flex-col items-center">
         <motion.div
           key={activeCategory + '-badge'}
-          initial={{ opacity: 0, y: -5 }}
+          initial={{ opacity: 0, y: -4 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3 }}
+          transition={{ duration: 0.15 }}
           className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border text-sm mb-3 shadow-inner ${current.badgeBg}`}
         >
           <Sparkles size={16} className="animate-pulse" /> {current.badgeText}
@@ -97,9 +97,9 @@ export default function Home() {
 
         <motion.h1 
           key={activeCategory + '-title'}
-          initial={{ opacity: 0, y: 10 }}
+          initial={{ opacity: 0, y: 6 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3 }}
+          transition={{ duration: 0.15 }}
           className="text-3xl md:text-4xl font-extrabold tracking-tight mb-2 text-slate-100"
         >
           {current.title}
@@ -109,7 +109,7 @@ export default function Home() {
           key={activeCategory + '-desc'}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.4 }}
+          transition={{ duration: 0.2 }}
           className="text-slate-400 text-xs md:text-sm max-w-md"
         >
           {current.description}
@@ -146,13 +146,13 @@ export default function Home() {
 
       {/* Interactive Smart Card */}
       <div className="z-10 flex flex-col items-center w-full max-w-sm">
-        <AnimatePresence mode="wait">
+        <AnimatePresence>
           <motion.div
             key={activeCategory}
-            initial={{ opacity: 0, scale: 0.95, y: 10 }}
+            initial={{ opacity: 0, scale: 0.97, y: 6 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95, y: -10 }}
-            transition={{ duration: 0.25 }}
+            exit={{ opacity: 0, scale: 0.97, y: -6 }}
+            transition={{ duration: 0.15, ease: "easeOut" }}
             className={`w-full bg-gradient-to-br ${current.cardBg} border ${current.borderColor} rounded-3xl p-6 shadow-2xl flex flex-col items-center text-center relative overflow-hidden backdrop-blur-xl`}
           >
             {/* Ambient Background Glow inside Card */}
@@ -190,7 +190,7 @@ export default function Home() {
                       </div>
                     </div>
                     <span className="text-slate-500 group-hover:text-slate-300 transition-colors text-xs font-medium">
-                      Visit &rarr;
+                      Visit →
                     </span>
                   </a>
                 );
