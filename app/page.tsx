@@ -84,40 +84,22 @@ export default function Home() {
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[30rem] h-[30rem] bg-[radial-gradient(circle_at_center,rgba(79,70,229,0.2)_0%,transparent_70%)] pointer-events-none transform-gpu" />
 
       {/* Hero Header Section */}
-      <div className="text-center max-w-xl mb-6 z-10 flex flex-col items-center">
-        <motion.div
-          key={activeCategory + '-badge'}
-          initial={{ opacity: 0, y: -4 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.15 }}
-          className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border text-sm mb-3 shadow-inner ${current.badgeBg}`}
-        >
+      <div className="text-center max-w-xl mb-5 z-10 flex flex-col items-center">
+        <div className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border text-sm mb-2 shadow-inner ${current.badgeBg}`}>
           <Sparkles size={16} className="animate-pulse" /> {current.badgeText}
-        </motion.div>
+        </div>
 
-        <motion.h1 
-          key={activeCategory + '-title'}
-          initial={{ opacity: 0, y: 6 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.15 }}
-          className="text-3xl md:text-4xl font-extrabold tracking-tight mb-2 text-slate-100"
-        >
+        <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight mb-1 text-slate-100">
           {current.title}
-        </motion.h1>
+        </h1>
 
-        <motion.p 
-          key={activeCategory + '-desc'}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.2 }}
-          className="text-slate-400 text-xs md:text-sm max-w-md"
-        >
+        <p className="text-slate-400 text-xs md:text-sm max-w-md">
           {current.description}
-        </motion.p>
+        </p>
       </div>
 
       {/* Category Navigation Bar */}
-      <div className="z-20 mb-8 flex flex-wrap justify-center gap-2 bg-slate-900/90 p-1.5 rounded-2xl border border-slate-800 shadow-xl backdrop-blur-md">
+      <div className="z-20 mb-6 flex flex-wrap justify-center gap-2 bg-slate-900/90 p-1.5 rounded-2xl border border-slate-800 shadow-xl backdrop-blur-md">
         <button
           onClick={() => setActiveCategory('socials')}
           className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all ${activeCategory === 'socials' ? 'bg-indigo-600 text-white shadow-lg' : 'text-slate-400 hover:text-white'}`}
@@ -144,16 +126,16 @@ export default function Home() {
         </button>
       </div>
 
-      {/* Interactive Smart Card */}
-      <div className="z-10 flex flex-col items-center w-full max-w-sm">
-        <AnimatePresence>
+      {/* Interactive Smart Card Container (Fixed height layout with smooth, unified box animation) */}
+      <div className="z-10 flex flex-col items-center w-full max-w-sm min-h-[440px] relative">
+        <AnimatePresence mode="popLayout">
           <motion.div
             key={activeCategory}
-            initial={{ opacity: 0, scale: 0.97, y: 6 }}
+            initial={{ opacity: 0, scale: 0.95, y: 10 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.97, y: -6 }}
-            transition={{ duration: 0.15, ease: "easeOut" }}
-            className={`w-full bg-gradient-to-br ${current.cardBg} border ${current.borderColor} rounded-3xl p-6 shadow-2xl flex flex-col items-center text-center relative overflow-hidden backdrop-blur-xl`}
+            exit={{ opacity: 0, scale: 0.95, y: -10 }}
+            transition={{ duration: 0.45, ease: [0.25, 1, 0.5, 1] }}
+            className={`absolute inset-x-0 top-0 w-full bg-gradient-to-br ${current.cardBg} border ${current.borderColor} rounded-3xl p-6 shadow-2xl flex flex-col items-center text-center overflow-hidden backdrop-blur-xl`}
           >
             {/* Ambient Background Glow inside Card */}
             <div className="absolute -right-10 -top-10 w-28 h-28 bg-white/5 rounded-full blur-xl pointer-events-none" />
@@ -166,7 +148,7 @@ export default function Home() {
             <h2 className="text-xl font-bold text-slate-100 mb-1">Mitsu Kazuwara</h2>
             <p className={`text-xs font-medium ${current.accentColor} mb-6`}>{current.subtitle}</p>
 
-            {/* Links List */}
+            {/* Links List (Sabay-sabay lumalabas kasama ng buong box) */}
             <div className="w-full flex flex-col gap-3">
               {current.links.map((link, idx) => {
                 const IconComponent = link.icon;
