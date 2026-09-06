@@ -4,13 +4,11 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Sparkles, Gamepad2, Briefcase, Clapperboard, User, MessageCircle, Video, ShieldAlert, Trophy, FolderKanban, FileText, Music, Globe, Tv } from 'lucide-react';
 
-// Category types for the Smart Card editions
 type CategoryType = 'socials' | 'gaming' | 'business' | 'entertainment';
 
 export default function Home() {
   const [activeCategory, setActiveCategory] = useState<CategoryType>('socials');
 
-  // Configuration data for each category
   const categoryData = {
     socials: {
       title: "Tap to Connect.",
@@ -83,7 +81,7 @@ export default function Home() {
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#1e293b15_1px,transparent_1px),linear-gradient(to_bottom,#1e293b15_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none" />
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[30rem] h-[30rem] bg-[radial-gradient(circle_at_center,rgba(79,70,229,0.2)_0%,transparent_70%)] pointer-events-none transform-gpu" />
 
-      {/* Category Navigation Bar (Static Container para smooth ang pagpindot) */}
+      {/* Category Navigation Bar */}
       <div className="z-20 mb-6 flex flex-wrap justify-center gap-2 bg-slate-900/90 p-1.5 rounded-2xl border border-slate-800 shadow-xl backdrop-blur-md">
         <button
           onClick={() => setActiveCategory('socials')}
@@ -117,12 +115,12 @@ export default function Home() {
           key={activeCategory}
           className="flex flex-col items-center w-full max-w-sm"
         >
-          {/* Header Section (Badge, Title, Description) */}
+          {/* Header Section */}
           <div className="text-center max-w-xl mb-5 z-10 flex flex-col items-center">
             <motion.div 
               initial={{ opacity: 0, scale: 0.96, y: 6 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
-              transition={{ duration: 0.22, ease: "easeOut", delay: 0.05 }}
+              transition={{ duration: 0.22, ease: "easeOut" }}
               className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border text-sm mb-2 shadow-inner ${current.badgeBg}`}
             >
               <Sparkles size={16} className="animate-pulse" /> {current.badgeText}
@@ -131,7 +129,7 @@ export default function Home() {
             <motion.h1 
               initial={{ opacity: 0, scale: 0.96, y: 6 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
-              transition={{ duration: 0.22, ease: "easeOut", delay: 0.1 }}
+              transition={{ duration: 0.22, ease: "easeOut" }}
               className="text-3xl md:text-4xl font-extrabold tracking-tight mb-1 text-slate-100"
             >
               {current.title}
@@ -140,18 +138,18 @@ export default function Home() {
             <motion.p 
               initial={{ opacity: 0, scale: 0.96, y: 6 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
-              transition={{ duration: 0.22, ease: "easeOut", delay: 0.15 }}
+              transition={{ duration: 0.22, ease: "easeOut" }}
               className="text-slate-400 text-xs md:text-sm max-w-md"
             >
               {current.description}
             </motion.p>
           </div>
 
-          {/* Smart Card Section */}
+          {/* Smart Card Section (No delay - instant animation kasabay ng header) */}
           <motion.div
             initial={{ opacity: 0, scale: 0.96, y: 6 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ duration: 0.22, ease: "easeOut", delay: 0.2 }}
+            transition={{ duration: 0.22, ease: "easeOut" }}
             className={`w-full bg-gradient-to-br ${current.cardBg} border ${current.borderColor} rounded-3xl p-6 shadow-2xl flex flex-col items-center text-center overflow-hidden backdrop-blur-xl relative`}
           >
             {/* Ambient Background Glow inside Card */}
